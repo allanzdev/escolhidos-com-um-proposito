@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escolhidos com um Propósito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0b1016;
+            --bg-light: #f3f3f3;
+            --card-bg: #eccfd8;
+            --card-dark: rgba(255, 255, 255, 0.05);
+            --text: #4f3b34;
+            --text-light: #f3f5f7;
+            --text-muted: #b5bec8;
+            --accent: #d7b98d;
+            --accent-pink: #cf7c8f;
+            --brown: #74401f;
+            --brown-dark: #5e3016;
+            --shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+            --radius: 10px;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #151d26 100%);
+            color: var(--text-light);
+            padding: 60px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(215, 185, 141, 0.08), transparent 30%);
+            pointer-events: none;
+        }
+
+        .main-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            margin: 0 0 20px;
+            letter-spacing: -0.02em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            margin: 0;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--bg-light);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .nav-links a {
+            color: var(--brown);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(116, 64, 31, 0.1);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: var(--brown);
+            color: white;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section.dark {
+            background: linear-gradient(160deg, var(--bg-dark), #151d26);
+            color: var(--text-light);
+            margin: 0;
+            max-width: none;
+        }
+
+        .section.light {
+            background: var(--bg-light);
+        }
+
+        .section.brown {
+            background: #ddd9cf;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: clamp(22px, 4vw, 44px);
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        .card.dark {
+            background: var(--card-dark);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(8px);
+        }
+
+        .card.poster {
+            background: #eeece3;
+            color: var(--text);
+            padding: 34px 28px 30px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card.white {
+            background: white;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+            border-radius: 24px;
+            padding: 50px;
+        }
+
+        /* Typography */
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin: 0 0 30px;
+            text-align: center;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .content-text {
+            font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+            line-height: 1.5;
+            margin-bottom: 1em;
+        }
+
+        .large-text {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            line-height: 1.3;
+            font-weight: 600;
+        }
+
+        .headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .poster .headline {
+            color: var(--brown);
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .verse {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 0.9em;
+            margin-top: 20px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        .verse-box {
+            display: inline-block;
+            background: var(--brown-dark);
+            color: #fff8ee;
+            padding: 14px 48px;
+            margin: 20px 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 800;
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            letter-spacing: 0.02em;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .highlight {
+            padding: 18px 20px;
+            border-left: 3px solid var(--accent);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            margin: 20px 0;
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+        }
+
+        .quote-box {
+            background: #f8f6f3;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+
+        .accent {
+            color: var(--accent-pink);
+        }
+
+        .tag {
+            display: inline-block;
+            margin-bottom: 14px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: rgba(215, 185, 141, 0.12);
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .credit {
+            text-align: center;
+            font-size: 0.8rem;
+            font-family: Arial, Helvetica, sans-serif;
+            opacity: 0.65;
+            margin-top: 30px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 15px 60px;
+            }
+
+            .section {
+                padding: 40px 15px;
+            }
+
+            .card {
+                margin: 20px auto;
+                padding: 20px;
+            }
+
+            .card.white {
+                padding: 30px 20px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+        }
+
+        /* Estilo para quando apenas uma seção está visível */
+        .section-solo {
+            min-height: 100vh !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 20px !important;
+            margin: 0 !important;
+            max-width: none !important;
+            width: 100% !important;
+        }
+
+        .section-solo .card {
+            max-width: 900px !important;
+            width: 100% !important;
+            margin: 0 auto !important;
+        }
+
+        /* Smooth transitions */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1 class="main-title">Escolhidos com um Propósito</h1>
+        <p class="main-subtitle">Uma jornada de fé, chamado e propósito divino</p>
+    </header>
+
+    <nav class="nav">
+        <div class="nav-links">
+            <a href="#escolhida">Escolhida é Escolhida</a>
+            <a href="#chamado">Chamado</a>
+            <a href="#custo">O Custo</a>
+            <a href="#improvavel">Improvável</a>
+            <a href="#missao">Missão</a>
+            <a href="#quando-deus-escolhe">Quando Deus Escolhe</a>
+            <a href="#peso-invisivel">Peso Invisível</a>
+            <a href="#guerra">Guerra</a>
+            <a href="#capacitacao">Capacitação</a>
+        </div>
+    </nav>
+
+    <!-- Section 1: Escolhida é Escolhida -->
+    <section id="escolhida" class="section">
+        <div class="card">
+            <h2 class="section-title">Escolhidos</h2>
+            <div class="content-text">
+                <p><strong>ESCOLHIDA É ESCOLHIDA!<span class="accent">♥</span></strong></p>
+
+                <p>Pode até tentar fugir, se esconder atrás das desculpas, ou achar que não é capaz... mas quando Deus
+                    escolhe, não tem volta!</p>
+
+                <p>O Espírito Santo vai te lembrar quem você é. Vai te lembrar do propósito, da promessa e do motivo
+                    pelo qual Ele te separou.</p>
+
+                <p>Você foi escolhida com intenções eternas. Mesmo com as tuas falhas, o Senhor te chama para ser vaso
+                    de honra nas mãos d'Ele. Há lugares que só você pode alcançar. Há pessoas que só ouvirão dEle
+                    através da sua voz.</p>
+
+                <p>O que Deus preparou pra você é exclusivo, e ninguém pode tomar o seu lugar.</p>
+
+                <p><strong>Então erga a cabeça, filha escolhida, e abrace o chamado!</strong></p>
+
+                <p class="verse">"Não fostes vós que me escolhestes, mas eu vos escolhi..." (João 15:16)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Chamado -->
+    <section id="chamado" class="section brown">
+        <div class="card poster">
+            <h2 class="headline">
+                Escolhido não tem<br>
+                escolha, escolhido<br>
+                tem chamado!
+            </h2>
+
+            <div class="verse-box">JOÃO 15:16</div>
+
+            <p class="large-text">
+                Ser escolhido dói, porque é ser<br>
+                <strong>lapidado</strong> em silêncio, mas <strong>resistir</strong><br>
+                como se estivesse em altares.
+            </p>
+
+            <div class="credit">Tali Almeida</div>
+        </div>
+    </section>
+
+    <!-- Section 3: O Custo -->
+    <section id="custo" class="section light">
+        <div class="card">
+            <div class="tag">Propósito</div>
+            <h2 class="section-title">Escolhido tem chamado</h2>
+
+            <div class="large-text">
+                O <em>chamado</em> vai te<br>
+                custar algo, mas vai te<br>
+                levar a viver <em>muito mais</em><br>
+                do que você imagina.
+            </div>
+
+            <div class="quote-box">
+                <p><strong>O PREÇO DO CHAMADO É O INVESTIMENTO DO CÉU EM VOCÊ!</strong></p>
+            </div>
+
+            <div class="verse">João 15:16</div>
+        </div>
+    </section>
+
+    <!-- Section 4: Improvável -->
+    <section id="improvavel" class="section">
+        <div class="card white">
+            <div style="font-size: 32px; color: #bbb; margin-bottom: 20px;">❝</div>
+
+            <div class="large-text">
+                Muitos podem te olhar como um improvável,
+                mas Deus te enxerga como um escolhido.
+            </div>
+
+            <div style="width: 60px; height: 4px; border-radius: 3px; background: #111; margin: 35px auto 10px; opacity: .15;"></div>
+
+            <div class="verse">
+                (cf. Jeremias 1:5)
+            </div>
+
+            <div style="margin-top: 40px; font-size: 14px; color: #777;">
+                Uma mensagem de fé e propósito.
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Missão -->
+    <section id="missao" class="section dark">
+        <div class="card dark">
+            <div class="tag">Propósito</div>
+            <h2 class="section-title" style="color: #fff;">O peso da escolha<br>e a força da missão</h2>
+
+            <div class="content-text">
+                <p>Quem é escolhido não vive por preferência. Vive por missão.
+                E isso significa que às vezes você vai carregar peso que não pediu, orar por pessoas que te feriram,
+                e seguir adiante mesmo sem reconhecimento.</p>
+
+                <p><strong>Mas aqui está o segredo:</strong></p>
+
+                <p>O céu não ungiu sua zona de conforto. O céu ungiu sua obediência.</p>
+
+                <p><strong>E sabe o que sustenta o escolhido?</strong></p>
+
+                <p>Um coração que entende que o propósito é maior do que o aplauso.
+                Que a cruz vem antes da coroa.
+                Que o altar vem antes da plataforma.</p>
+
+                <p><strong>Hoje, o céu te convoca:</strong><br>
+                Assuma o peso da escolha da cruz de Jesus sobre você.</p>
+            </div>
+
+            <div class="highlight">
+                "Escolhido não é título. É responsabilidade. Não é privilégio. É compromisso com a eternidade."
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Quando Deus Escolhe -->
+    <section id="quando-deus-escolhe" class="section dark">
+        <div class="card dark">
+            <div class="tag">Chamado</div>
+            <h2 class="section-title" style="color: #fff;">Quando Deus escolhe alguém</h2>
+
+            <div class="content-text">
+                <p>📖 O escolhido não tem escolha.
+                Quando Jesus te chamou, Ele já via em você algo que ninguém mais via.
+                Não foi coincidência, foi propósito. ✝️✨</p>
+
+                <p>💬 Você se lembra do dia em que ouviu a voz dEle no coração?
+                Talvez tenha sido em um momento de dor, solidão ou dúvida...
+                Mas foi ali que começou a sua história com Ele. ❤️</p>
+            </div>
+
+            <div class="highlight">
+                Deus não escolhe baseado no que os outros veem. Ele escolhe pelo propósito que colocou dentro de você.
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Peso Invisível -->
+    <section id="peso-invisivel" class="section dark">
+        <div class="card dark">
+            <div class="tag">Obediência</div>
+            <h2 class="section-title" style="color: #fff;">O peso invisível<br>de quem foi chamado</h2>
+
+            <div class="content-text">
+                <p>Escolhido não tem escolha.
+                Tem cruz. Tem entrega.
+                Tem dia em que tudo que se tem são lágrimas e a certeza de que está obedecendo — mesmo sem entender.</p>
+
+                <p><strong>Mas há glória nisso.</strong><br>
+                Escolhido não é quem se autopromove.
+                É quem carrega o peso que ninguém vê, e ainda assim não solta o arado.</p>
+
+                <p>Você não foi chamado para agradar.
+                Você foi separado para impactar.
+                E o preço disso é ser incompreendido por muitos... mas conhecido profundamente por Deus.</p>
+            </div>
+
+            <div class="highlight">
+                Nem todo chamado será aplaudido. Às vezes, a marca do propósito verdadeiro é continuar obedecendo em
+                silêncio, sustentado apenas pela convicção de que Deus conhece cada renúncia do seu coração.
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: Guerra -->
+    <section id="guerra" class="section dark">
+        <div class="card dark">
+            <div class="tag">Chamado</div>
+            <h2 class="section-title" style="color: #fff;">Quando a resposta vem<br>em forma de guerra</h2>
+
+            <div class="content-text">
+                <p>Você pediu direção, mas o que veio foi peso, orou por respostas, e o que veio foi guerra.</p>
+
+                <p><strong>E é agora, no meio desse lugar desconfortável, que Deus te lembra:</strong></p>
+
+                <p>"Você foi escolhido. E escolhido não tem escolha. Escolhido tem chamado!"</p>
+
+                <p>Você queria tranquilidade, mas Deus está te treinando pelo caminho mais estreito.<br>
+                Você queria alívio, mas Deus está te formando com carga.<br>
+                Você queria entendimento, mas Deus está construindo fé cega que obedece antes de entender.</p>
+            </div>
+
+            <div class="quote-box" style="background: rgba(255, 255, 255, .045); border: 1px solid rgba(255, 255, 255, .05); color: #fff9ef;">
+                "Porque os meus pensamentos não são os vossos pensamentos, nem os vossos caminhos os meus caminhos, diz o Senhor." - Isaías 55:8
+            </div>
+
+            <div class="highlight">
+                A guerra que você está vivendo não é castigo. É treinamento. Deus está te preparando para carregar something maior than your atual capacity.
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 9: Capacitação -->
+    <section id="capacitacao" class="section dark">
+        <div class="card dark">
+            <div class="tag">Graça</div>
+            <h2 class="section-title" style="color: #fff;">Deus não escolhe<br>os capacitados</h2>
+
+            <div class="content-text">
+                <p>Deus não escolhe os capacitados, mas capacita os escolhidos. Ele não se baseia em
+                méritos humanos, habilidades naturais ou status social. Ao longo das Escrituras, vemos como Deus
+                escolheu pessoas improváveis: Moisés, apesar de sua idade avançada; Raabe, mesmo sendo uma
+                prostituta; Gideão, ainda que fosse o menor da casa; Ana, apesar da esterilidade; Davi, que nem
+                sequer estava na lista; Pedro, com sua inconstância; Paulo, que antes era perseguidor da igreja.</p>
+
+                <p><strong>O critério de Deus é a graça, não o mérito.</strong></p>
+            </div>
+
+            <div class="highlight">
+                Quando Deus cruza sua vida com propósito, Ele não está olhando para o que você pode oferecer hoje, mas para o que Ele pode fazer através de você amanhã.
+            </div>
+
+            <div class="quote-box" style="background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .06); color: #fff9ef; font-style: italic;">
+                "Mas Deus escolheu as coisas loucas deste mundo para confundir as sábias; e Deus escolheu as coisas fracas deste mundo para confundir as fortes." - 1 Coríntios 1:27
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section" style="background: var(--bg-dark); color: var(--text-light); text-align: center; padding: 40px 20px;">
+        <div class="credit" style="font-size: 1rem; opacity: 1;">
+            <p>Compilação de mensagens sobre o chamado e propósito dos escolhidos de Deus</p>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">
+                Fontes: @abibliadatai, @talioficiall e reflexões bíblicas
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Função para mostrar apenas uma seção
+        function showOnlySection(targetId) {
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                // Esconder header, navegação e footer
+                const header = document.querySelector('.header');
+                const nav = document.querySelector('.nav');
+                const footer = document.querySelector('footer');
+                
+                if (header) header.style.display = 'none';
+                if (nav) nav.style.display = 'none';
+                if (footer) footer.style.display = 'none';
+                
+                // Esconder todas as seções
+                document.querySelectorAll('.section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Mostrar apenas a seção selecionada e aplicar estilo solo
+                targetSection.style.display = 'flex';
+                targetSection.classList.add('section-solo');
+                
+                // Ajustar o body para tela cheia
+                document.body.style.margin = '0';
+                document.body.style.padding = '0';
+                document.body.style.minHeight = '100vh';
+                
+                // Rolar para o topo
+                window.scrollTo(0, 0);
+                
+                return true;
+            }
+            return false;
+        }
+
+        // Verificar hash imediatamente quando o script roda
+        if (window.location.hash) {
+            // Tentar mostrar a seção imediatamente
+            if (!showOnlySection(window.location.hash)) {
+                // Se não conseguiu, aguardar o DOM carregar
+                document.addEventListener('DOMContentLoaded', function() {
+                    showOnlySection(window.location.hash);
+                });
+            }
+        }
+
+        // Verificar novamente quando DOM estiver completamente carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.location.hash) {
+                showOnlySection(window.location.hash);
+            }
+        });
+
+        // Event listener para cliques nos links
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    showOnlySection(targetId);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
